@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KWA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="splash-screen" class="d-flex flex-column justify-content-center align-items-center vh-100 bg-primary text-white">
+        <h1>Cargando...</h1>
+        <div class="progress w-50 mt-3">
+            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="progress-text" class="mt-2"></p>
+    </div>
+
+    <div id="main-content" class="container-fluid d-none">
+        
+        <div id="auth-container" class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <ul class="nav nav-pills nav-fill" id="auth-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-panel" type="button" role="tab" aria-controls="login-panel" aria-selected="true">Iniciar Sesión</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-panel" type="button" role="tab" aria-controls="register-panel" aria-selected="false">Registrarse</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="auth-tabContent">
+                            
+                            <div class="tab-pane fade show active" id="login-panel" role="tabpanel" aria-labelledby="login-tab">
+                                <form id="login-form">
+                                    <div class="mb-3">
+                                        <label for="login-username" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="login-username" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="login-password" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="login-password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Acceder</button>
+                                </form>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="register-panel" role="tabpanel" aria-labelledby="register-tab">
+                                <form id="register-form">
+                                    <div class="mb-3">
+                                        <label for="register-username" class="form-label">Nuevo Usuario</label>
+                                        <input type="text" class="form-control" id="register-username" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="register-password" class="form-label">Nueva Contraseña</label>
+                                        <input type="password" class="form-control" id="register-password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary w-100">Crear Cuenta</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-dashboard" class="d-none">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Panel de Administración</a>
+                    <button class="btn btn-danger" id="logout-btn">Cerrar Sesión</button>
+                </div>
+            </nav>
+            <div class="container mt-4">
+                <h2 class="mb-4">Gestión de Contenido</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">Crear Módulo</div>
+                            <div class="card-body">
+                                <form id="form-create-modulo">
+                                    <div class="mb-3">
+                                        <label for="modulo-nombre" class="form-label">Nombre del Módulo</label>
+                                        <input type="text" class="form-control" id="modulo-nombre" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Crear</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-secondary text-white">Crear Unidad</div>
+                            <div class="card-body">
+                                <form id="form-create-unidad">
+                                    <div class="mb-3">
+                                        <label for="unidad-modulo" class="form-label">Módulo</label>
+                                        <select class="form-select" id="unidad-modulo" required></select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="unidad-nombre" class="form-label">Nombre de la Unidad</label>
+                                        <input type="text" class="form-control" id="unidad-nombre" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Crear</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">Crear Actividad y Test</div>
+                            <div class="card-body">
+                                <form id="form-create-actividad">
+                                    <div class="mb-3">
+                                        <label for="actividad-unidad" class="form-label">Unidad</label>
+                                        <select class="form-select" id="actividad-unidad" required></select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="actividad-nombre" class="form-label">Nombre de la Actividad</label>
+                                        <input type="text" class="form-control" id="actividad-nombre" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="actividad-dificultad" class="form-label">Dificultad (1-10)</label>
+                                        <input type="number" class="form-control" id="actividad-dificultad" min="1" max="10" required>
+                                    </div>
+                                    <div id="test-questions-container">
+                                        </div>
+                                    <button type="button" class="btn btn-info mt-3" id="add-question-btn">Agregar Pregunta</button>
+                                    <button type="submit" class="btn btn-success mt-3">Crear Actividad con Test</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-5">Listado de Contenido</h2>
+                <div id="content-tables-container" class="mt-4">
+                </div>
+
+                <h2 class="mt-5">Gestión de Usuarios</h2>
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        Lista de Usuarios
+                        <button class="btn btn-sm btn-light" id="add-user-btn">
+                            <i class="fas fa-user-plus"></i> Nuevo Usuario
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-5">Avance de Estudiantes</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="alumnos-table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntaje Total</th>
+                                <th>Progreso</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="student-dashboard" class="d-none">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <span class="navbar-brand">¡Bienvenido, <span id="student-username-display"></span>!</span>
+                    <button class="btn btn-danger" id="student-logout-btn">Cerrar Sesión</button>
+                </div>
+            </nav>
+            <div class="container mt-4">
+                <h2>Tu Avance</h2>
+                <div id="student-stats" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-center text-white bg-info mb-3">
+                                <div class="card-header">Puntos Totales</div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-1" id="total-score-display">0</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center text-white bg-warning mb-3">
+                                <div class="card-header">Vidas Restantes</div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-1" id="lives-display">3</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center text-white bg-success mb-3">
+                                <div class="card-header">Megas Acumulados</div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-1" id="megas-display">0</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>Módulos de la Carrera</h2>
+                <div id="modules-container">
+                    </div>
+            </div>
+            
+            <div class="modal fade" id="test-modal" tabindex="-1" aria-labelledby="test-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="test-modal-label">Test de Actividad</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="test-body">
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="submit-test-btn">Enviar Respuestas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="achievement-modal" tabindex="-1" aria-labelledby="achievement-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="achievement-modal-label">¡Logro Desbloqueado!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div id="achievement-icon" class="mb-3"></div>
+                            <h3 id="achievement-message"></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
